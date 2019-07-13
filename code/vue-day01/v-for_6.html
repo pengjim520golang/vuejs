@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <!-- 属于vue的部分 -->
+    <div id="root">
+        <ul>
+            <li v-for="rs in sets">{{rs.name}},{{rs.age}}</li>
+        </ul>
+
+        <ul>
+            <li v-for="rs,index in sets">{{index}}:{{rs.name}},{{rs.age}}</li>
+        </ul>
+
+        <!-- 调优就必须绑定:key -->
+        <ul>
+                <li v-for="rs,index in sets" :key="rs.id">{{rs.id}}:{{rs.name}},{{rs.age}}</li>
+        </ul>
+    </div>
+</body>
+
+<script src="https://cdn.bootcss.com/vue/2.6.10/vue.js"></script>
+
+<script>
+    //这部分数据javascript本身部分
+    window.onload = function(){
+        const vm = new Vue({
+            el: "#root", //要渲染范围
+            //要渲染数据有哪些
+            data : {
+               sets:[
+                   {id:100,name:"pengjin",age:33},
+                   {id:220,name:"zs",age:31},
+                   {id:333,name:"ls",age:32},
+               ]
+            }
+        })
+    }
+</script>
+
+</html>

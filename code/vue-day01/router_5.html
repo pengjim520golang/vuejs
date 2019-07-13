@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+
+    <style>
+        .aStyle{
+            text-decoration: none;
+            color: #000;
+            background: #ccc;
+            border: 1px dashed pink;
+            margin: 5px;
+            padding: 4px 6px; 
+        }
+        .router-link-active{
+            color: #fff;
+            background: red;
+        }
+    </style>
+</head>
+<body>
+    <div id="root">
+            <button @click="eventBack">后退</button>
+            <button @click="eventForward">前进</button>
+            <button @click="toPro">go to 产品</button>
+            <br /> <br /> <br /> 
+            <router-link class="aStyle" to="/user">~用户</router-link>&nbsp;&nbsp;
+            <router-link class="aStyle" to="/news">~新闻</router-link>&nbsp;&nbsp;
+            <router-link  class="aStyle" to="/pros">~产品</router-link>&nbsp;&nbsp;
+        <hr />
+        <router-view></router-view>
+
+
+    </div>
+</body>
+<script src="https://cdn.bootcss.com/vue/2.6.10/vue.js"></script>
+<script src="https://cdn.bootcss.com/vue-router/3.0.7/vue-router.js"></script>
+<script>
+
+    window.onload = function(){
+
+        //定义路由
+        // vue当中使用#/的方式分发路由,本质就是使用锚点来分发路由
+        // 由于vue的路由是在当前页面进行划分，所以必须要有一个路由的视图功能
+        const vmRouter = new VueRouter({
+            routes:[
+                {path:"/user",component:{template:"<div>用户组件</div>"}},
+                {path:"/news",component:{template:"<div>新闻组件</div>"}},
+                {path:"/pros",component:{template:"<div>产品组件</div>"}},
+            ]
+        })
+
+        const vm = new Vue({
+            el:"#root",
+            router:vmRouter,
+
+            methods:{
+                eventBack(){
+                   this.$router.go(-2)
+                },
+                eventForward(){
+                    this.$router.go(1)
+                },
+                toPro(){
+                    this.$router.push("/pros")
+                }
+            }
+        })
+    }
+
+</script>
+</html>

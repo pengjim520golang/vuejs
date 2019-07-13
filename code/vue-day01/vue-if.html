@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .box{
+            width: 300px;
+            height: 300px;
+            border: 1px solid #000;
+            background: pink; 
+        }
+    </style>
+</head>
+<body>
+    <!-- 属于vue的部分 -->
+    <div id="root">
+            <button @click="eventFade">显示/隐藏</button>
+            <div class="box" v-if="boolShow"></div>
+    </div>
+
+    
+</body>
+
+<script src="https://cdn.bootcss.com/vue/2.6.10/vue.js"></script>
+
+<script>
+    //这部分数据javascript本身部分
+    window.onload = function(){
+        const vm = new Vue({
+            el: "#root", //要渲染范围
+            //要渲染数据有哪些
+            data : {
+                boolShow:true
+            },
+            methods:{
+                eventFade(){
+                    this.boolShow = !this.boolShow
+                }
+            }
+        })
+    }
+</script>
+
+</html>

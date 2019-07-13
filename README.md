@@ -246,3 +246,118 @@ v-show:隐藏了html元素
 </html>
 ```
 
+
+# vue-router 路由
+
+## 路由的定义
+
+### 步骤1：实例化路由
+
+```html
+<script src="https://cdn.bootcss.com/vue/2.6.10/vue.js"></script>
+<script src="https://cdn.bootcss.com/vue-router/3.0.7/vue-router.js"></script>
+<script>
+    const vmRouter = new VueRouter({
+        routes:[
+            {path:"路由的地址",component:{template:"模板的字符串"}}
+        ]
+    })
+
+    const vm = new Vue({
+        .... 
+        router:vmRouter
+    })
+</script>
+```
+
+### 步骤2：需要在渲染控制范围中加入router-view标签
+
+```html
+
+<div>
+    <router-view></router-view>
+</div>
+
+<script>
+    const vmRouter = new VueRouter({
+        routes:[
+            {path:"路由的地址",component:{template:"模板的字符串"}}
+        ]
+    })
+
+    const vm = new Vue({
+        el:"#root" 
+        router:vmRouter
+    })
+</script>
+```
+
+> 注意事项:假设需要在初始化vue实例的时候，访问路由实例需要通过`this.$router`去访问
+
+```html
+<script>
+    const vmRouter = new VueRouter({
+        routes:[
+            {path:"路由的地址",component:{template:"模板的字符串"}}
+        ]
+    })
+
+    const vm = new Vue({
+        el:"#root" 
+        router:vmRouter,
+        methods:{
+            fn(){
+                this.$router.push("/user/12345")
+            }
+        }
+    })
+</script>
+```
+
+> 注意事项:go表示前进或者后退, -1表示后退1次,-2后退两次..依次类推,正数表示前进,推算方式与后退一致
+
+
+### 步骤4：跳转路由<router-link></router-link>标签
+
+标签中有以下属性要注意:
+
+to : 表示跳转路由地址
+
+class: 表示自定义的css样式
+
+.router-link-active如果被重写，则可以定义<router-link>激活样式
+
+
+### 步骤5：嵌套路由
+
+使用`children`选项定义路由,其跟`component`选项处于同一级别
+
+```javascript
+        const vmRouter = new VueRouter({
+            routes:[
+                {
+                    path:"/user/:id",
+                    component:{
+                        template:
+                        `
+                        <div>
+                            当前用户的id={{$route.params.id}}
+                            <br />
+                            <router-view></router-view>
+                        </div>
+                        `, //err
+                    },
+                    children:[
+                            {
+                                path:"details", //err
+                                component:{template:"<div>某某用户，来自xxx地方,xxxx学历</div>"} //err
+                            },
+                            {
+                                path:"message", //err
+                                component:{template:"<div>您有1条新的消息请注意查收</div>"} //err
+                            }
+                    ]
+                }
+            ]
+        })
+```

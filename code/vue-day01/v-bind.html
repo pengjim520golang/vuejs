@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <!-- 属于vue的部分 -->
+    <div id="root">
+
+        <div v-bind:title="x+y">
+            鼠标放上去显示x+y的结果
+        </div>
+
+    </div>
+</body>
+
+<script src="https://cdn.bootcss.com/vue/2.6.10/vue.js"></script>
+
+<script>
+    //这部分数据javascript本身部分
+    window.onload = function(){
+        const vm = new Vue({
+            el: "#root", //要渲染范围
+            //要渲染数据有哪些
+            data : {
+                x:100,
+                y:200
+            }
+        })
+    }
+</script>
+
+</html>
