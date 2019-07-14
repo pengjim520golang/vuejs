@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <!-- 属于vue的部分 -->
+    <div id="root">
+        <h1>{{content | myreplace}}</h1>
+     </div>
+</body>
+
+<script src="https://cdn.bootcss.com/vue/2.6.10/vue.js"></script>
+
+<script>
+    window.onload = function(){
+
+        //定义全局过滤器：Vue.filter(名称,函数)
+        Vue.filter("myreplace",function(str){
+            return str.replace(/善良/g,"可爱") 
+        })
+
+        const vm = new Vue({
+            el: "#root", 
+           
+            data : {
+                content:"曾经，我是一个善良的人,善良的我傻傻的问,谁是世界上最善良的人?"
+            }
+        })
+    }
+</script>
+
+</html>

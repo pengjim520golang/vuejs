@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="root">
+        <button @click="startLoopText">启动跑马灯</button>
+        <button>停止跑马灯</button>
+        <hr />
+        <h1>{{message}}</h1>
+    </div>
+</body>
+<script src="https://cdn.bootcss.com/vue/2.6.10/vue.js"></script>
+<script>
+    window.onload = function(){
+        const vm = new Vue({
+            el:"#root",
+            data:{
+                message:"火链区块链学院~!",
+            },
+            methods:{
+                startLoopText(){
+                    
+                    setInterval(()=>{
+                        //取出字符串中的第1个字符
+                        let start = this.message.substring(0,1)
+                        //取出剩余的字符
+                        let end = this.message.substring(1) 
+                        this.message = end + start 
+                    },500)
+                }
+            }
+        })
+    }
+
+</script>
+</html>

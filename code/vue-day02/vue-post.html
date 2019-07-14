@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <!-- 属于vue的部分 -->
+    <div id="root">
+
+        <ul>
+            <li>username:{{userinfo.user}},password:{{userinfo.pass}},server:{{userinfo.from}}</li>
+        </ul>
+    </div>
+</body>
+
+<script src="https://cdn.bootcss.com/vue/2.6.10/vue.js"></script>
+<script src="https://cdn.bootcss.com/vue-resource/1.3.4/vue-resource.js"></script>
+<script>
+    //这部分数据javascript本身部分
+    window.onload = function(){
+        const vm = new Vue({
+            el: "#root", //要渲染范围
+            data:{
+                userinfo:{}
+            },
+            methods:{
+                fn(){
+                    this.$http.post("http://localhost:8859/vueapi/userinfo",{
+                        username:"pengjin",
+                        password:"12345"
+                    },{}).then( result=>{
+                        console.log(result.body)
+                        this.userinfo = result.body 
+                    })
+                }
+            },
+            created(){
+                this.fn() 
+            }
+        })
+    }
+</script>
+
+</html>

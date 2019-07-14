@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css">
+</head>
+<body>
+    <div id="root">
+
+        <table class="table table-striped table-bordered">
+            <thead>
+                <tr>
+                    <th>产品id</th>
+                    <th>产品名称</th>
+                    <th>发布时间</th>
+                    <th>操作</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr v-for="rs in pros" :key="rs.id">
+                    <td>{{rs.id}}</td>
+                    <td>{{rs.name}}</td>
+                    <td>{{rs.ctime}}</td>
+                    <td><a href="#">删除</a></td>
+                </tr>
+            </tbody>
+        </table>
+
+    </div>
+</body>
+<script src="https://cdn.bootcss.com/vue/2.6.10/vue.js"></script>
+<script>
+    window.onload = function(){
+        const vm = new Vue({
+            el:"#root",
+            data:{
+                pros:[
+                    {id:1,name:"苹果-iphone 8",ctime:new Date()},
+                    {id:2,name:"华为荣耀系列-Mate20",ctime:new Date()},
+                ]
+            }
+        })
+    }
+</script>
+</html>
