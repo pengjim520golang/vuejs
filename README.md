@@ -361,3 +361,130 @@ class: 表示自定义的css样式
             ]
         })
 ```
+
+# vue的过滤器
+
+## 使用过滤器的方式
+
+在vue里面使用过滤器一般通过`{{}}`插入表达式并使用`|`管道来使用,管道的数量表示使用过滤器的数量
+
+```javascript
+{{数据变量 | 过滤器名称1... }}
+```
+
+> 在一般的情况下,vue2.3以上版本会把数据变量作为第一个参数传递过滤器,这就意味着过滤器至少含有一个参数
+
+## 定义Vue的全局过滤器
+
+```javascript
+Vue.filter("open",function(defaultArg,...args){
+
+})
+```
+
+> 多参数使用的方式{{content | open(参数2,参数3)}},参数1就是content
+
+## 定义Vue的私有过滤器
+
+私有过滤是定义在vue实例内部,通过`filters`来实现
+
+```javascript
+new Vue({
+    el:"#root",
+    filters:{
+        open:function(defaultArgs,...args){
+            ....
+        }
+    }
+})
+```
+
+# vue的自定义指令
+
+自定义指令也是使用`v-`作为前缀,定义的时候不需要加`v-`,都是用`directive`的方式进行定义
+
+## 全局的定义方式
+
+```javascript
+Vue.directive("focus",{
+    bind:function(el,binding){
+
+    },
+    inserted:function(el,binding){
+
+    },
+    update:function(el,binding){
+
+    }
+})
+```
+
+bind: 指定的是设置,一般是指代当前的el可以在虚拟DOM中完成
+
+update: 指定的是设置,一般是指代当前的el可以在虚拟DOM中完成
+
+inserted:指定的是行为,一般指代当前的el必须在DOM树中完成
+
+## 私有的定义方式
+
+```javascript
+new Vue({
+    el:"#root",
+    directives:{
+       focus:{
+            bind:function(el,binding){
+
+            },
+            inserted:function(el,binding){
+
+            },
+            update:function(el,binding){
+
+            }           
+       }
+    }
+})
+```
+
+
+## 简写的定义方式
+
+一般指考虑`bind`和`update`可以简写
+
+```javascript
+new Vue({
+    el:"#root",
+    directives:{
+       focus:function(el,binding){
+
+       }
+    }
+})
+```
+
+
+> binding这个参数有3个重要的属性: name表示指令的名称,value表示绑定的值,expression表示绑定的原始表达式
+
+
+### 面试题
+
+```javascript
+new Vue({
+    el:"#root",
+    data:{
+        message:"hello"
+    },
+    directives:{
+       demo:(el,binding)=>{
+           //console.log(this.message)  //会发生错误码,this指向是directives对象
+           console.log(binding.value.message)
+       }
+    }
+})
+```
+如果必须要访问data中的message，必须通过binding去完成,代码如下:
+
+```html
+<div v-demo="{message}" :title="message">content</div>
+```
+
