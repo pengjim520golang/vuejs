@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .box{
+            width:100px;height: 100px;background: red;margin: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div id="root">
+
+    父组件的:{{message}}<br />
+    <cmp :msg="message"></cmp>
+   
+
+
+    </div>
+
+
+    <template id="tmp">
+        <div>
+            <button @click="fn">show</button>
+            <button @click="change">update</button>
+            <div>hello,{{msg}},hi,{{name}}</div>
+        </div>
+    </template>
+
+
+
+</body>
+<script src="https://cdn.bootcss.com/vue/2.6.10/vue.js"></script>
+<script>
+    window.onload = function(){
+
+     
+                    
+
+        
+
+
+        const vm = new Vue({
+            el:"#root",
+            data:{
+                message:"pengjin"
+            },
+            components:{
+                "cmp":{
+                    template:"#tmp",
+                    data:function(){
+                        return {
+                            name:"zhangsan"
+                        }
+                    },
+                    //如果需要在组件中绑定msg属性，必须通过props配置项来设置该属性
+                    props:['msg'], //这种定义方式可以直接解决子向父取值通信的操作
+                    methods:{
+                        fn(){
+                            console.log( "name is ", this.name)
+                            console.log( "msg is ", this.msg)
+                        },
+                        change(){
+                            //组件内部的data是可以随便修改
+                            this.name = "修改为lisi" 
+                        }
+                    }
+                }
+            }
+        })
+    }
+</script>
+</html>
+
+
+<!--
+    manGenderOk
+
+    aasdfasdCxxx
+-->

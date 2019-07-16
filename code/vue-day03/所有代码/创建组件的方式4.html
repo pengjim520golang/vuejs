@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="root">
+        <cmphello />
+
+    </div>
+
+    <!-- 在外部使用template标签来定义组件 -->
+    <template id="cmp1">
+        <div>这是使用template标签定义出来的组件</div>
+    </template>
+
+</body>
+<script src="https://cdn.bootcss.com/vue/2.6.10/vue.js"></script>
+<script>
+    window.onload = function(){
+
+        //如果一个组件的布局非常的复杂,推荐使用这种方法
+        Vue.component("cmphello",{
+            template:"#cmp1"
+        })
+       
+
+        const vm = new Vue({
+            el:"#root"
+        })
+    }
+</script>
+</html>
+
+
+<!--
+    manGenderOk
+
+    aasdfasdCxxx
+-->

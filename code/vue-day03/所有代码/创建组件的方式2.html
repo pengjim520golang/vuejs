@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="root">
+        <cmp-Hello />
+
+    </div>
+</body>
+<script src="https://cdn.bootcss.com/vue/2.6.10/vue.js"></script>
+<script>
+    window.onload = function(){
+
+        //在Vue.component当中指定组件实例,Vue.component("组件的名称",组件的实例)
+        Vue.component("cmpHello",Vue.extend({
+            template:"<h3>这是第1种创建组件的方式~~</h3>"
+        }))
+       
+
+        const vm = new Vue({
+            el:"#root"
+        })
+    }
+</script>
+</html>
+
+
+<!--
+    manGenderOk
+
+    aasdfasdCxxx
+-->

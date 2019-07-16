@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="root">
+
+        <input type="text" v-model="name" @keyup.13="add" /><button @click="add">添加</button>
+        <hr />
+        <ul>
+            <li v-for="rs in pros" :key="rs.id" >{{rs.name}}</li>
+        </ul>
+    </div>
+</body>
+<script src="https://cdn.bootcss.com/vue/2.6.10/vue.js"></script>
+
+<!--
+
+    v-if : 如果true元素显示,false元素被删除
+    v-else : 如果false元素显示,true元素被删除
+
+-->
+
+<script>
+const vm = new Vue({
+    el:"#root",
+    data:{
+        name:"",
+        pros:[
+            {id:1,name:"iphone"},
+            {id:2,name:"android"}
+        ]
+    },
+    methods:{
+        add(){
+            let data = {id:Date.now(),name:this.name}
+            this.pros.push(data) 
+        }
+    }
+})
+</script>
+</html>

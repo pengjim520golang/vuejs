@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .box{
+            width:100px;height: 100px;background: red;margin: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div id="root">
+
+    
+    <counter></counter>
+
+    <counter></counter>
+
+    <counter></counter>
+
+    <counter></counter>
+
+
+    </div>
+
+
+
+    <template id="cmpCounter">
+        <div>
+            <button @click="add">点击+1</button>
+            <h1>{{count}}</h1>
+            <hr />
+        </div>
+    </template>
+
+
+
+</body>
+<script src="https://cdn.bootcss.com/vue/2.6.10/vue.js"></script>
+<script>
+    window.onload = function(){
+        //在自定义组件中data属性必须是一个函数,函数必须要返回一个对象
+        Vue.component("counter",{
+            template:"#cmpCounter",
+            data:function(){
+                return {
+                    count:0
+                }
+            },
+            methods:{
+                add(){
+                    this.count ++ 
+                }
+            }
+        })
+
+
+        const vm = new Vue({
+            el:"#root",
+        })
+    }
+</script>
+</html>
+
+
+<!--
+    manGenderOk
+
+    aasdfasdCxxx
+-->

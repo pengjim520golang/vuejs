@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .box{
+            width:100px;height: 100px;background: red;margin: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div id="root">
+
+    <cmphello />
+    
+    <cmphello />
+
+
+    </div>
+
+
+
+
+</body>
+<script src="https://cdn.bootcss.com/vue/2.6.10/vue.js"></script>
+<script>
+    window.onload = function(){
+
+        //如果一个组件的布局非常的简单组件,推荐使用这种方法
+        // 跟template创建的方式一样，只能单闭合标签只能创建一个组件
+        Vue.component("cmphello",{
+            template:
+            `
+            <div class="box">
+                这是组件最简单定义的方式3
+            </div>
+            `
+        })
+       
+
+        const vm = new Vue({
+            el:"#root"
+        })
+    }
+</script>
+</html>
+
+
+<!--
+    manGenderOk
+
+    aasdfasdCxxx
+-->

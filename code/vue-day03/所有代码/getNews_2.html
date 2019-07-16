@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        [v-cloak]{
+            display: none; 
+        }
+        .pageSytle{
+            display: inline-block;
+            width: 22px;
+            height: 22px;
+            font-size: 14px;
+            line-height: 22px;
+            text-align: center; 
+            text-decoration: none;
+            border: 1px solid #ccc;
+            margin: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div id="root">
+
+        <div class="container">
+            <ul>
+                <li v-for="rs in news" :key="rs.id" v-cloak>{{rs.id}},{{rs.title}},{{rs.pubtime | date_fmt}}</li> 
+            </ul>
+            <div>
+                <a href="#" @click.prevent="getNews(page)" v-for="page in pageInfo.pageTotal" v-cloak class="pageSytle">{{page}}</a>
+            </div>
+        </div>
+    </div>
+</body>
+<script src="https://cdn.bootcss.com/vue/2.6.10/vue.js"></script>
+<script src="https://cdn.bootcss.com/vue-resource/1.3.4/vue-resource.js"></script>
+
+
+<script>
+window.onload=function(){
+
+    const newsListApi = "http://localhost:8859/news/list/page"
+
+    Vue.filter("date_fmt",function(unix_time){
+            let dateObj = new Date( unix_time*1000 )
+            let Y = dateObj.getFullYear()
+            let m = dateObj.getMonth()+1 < 10 ? `0${dateObj.getMonth()+1}` : dateObj.getMonth()+1
+            let d = dateObj.getDate() < 10 ? `0${dateObj.getDate()}` : dateObj.getDate()
+            let H = dateObj.getHours() < 10 ? `0${dateObj.getHours()}` : dateObj.getHours()
+            let i = dateObj.getMinutes() < 10 ? `0${dateObj.getMinutes()}` : dateObj.getMinutes()
+            let s = dateObj.getSeconds() < 10 ? `0${dateObj.getSeconds()}` : dateObj.getSeconds()
+            return `${Y}-${m}-${d} ${H}:${i}:${s}`
+    })
+
+    const vm = new Vue({
+        el:"#root",
+        data:{
+            news:[],
+            pageInfo:{},
+            pages:12 
+        },
+        methods:{
+            //根据页码获取数据
+            getNews(pagenum){
+                //通过get方式获取api
+                this.$http.get(`${newsListApi}/${pagenum}`).then(result=>{
+                    //console.log(result.body) 
+                    this.news = result.body.news 
+                    this.pageInfo = result.body.pageInfo 
+                })
+            }
+        },
+        //生命周期函数,created生命函数是在data,methods被初始化完成后触发
+        created(){
+            this.getNews(1) //默认查询的是第1页
+        }
+    })
+}
+
+</script>
+
+</html>

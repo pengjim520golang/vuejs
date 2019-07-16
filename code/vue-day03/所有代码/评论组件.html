@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="root">
+        <add-Form @func="getAllComments"></add-Form>
+        <hr />
+        <ul>
+            <li v-for="rs in commentSet" :key="rs.id">{{rs.title}}</li>
+        </ul>
+    </div>
+
+    <template id="commentFrm">
+        <div>
+            title:<input type="text" v-model="title"><button @click="addComment">添加评论</button>
+        </div>
+    </template>
+</body>
+<script src="https://cdn.bootcss.com/vue/2.6.10/vue.js"></script>
+<script>
+window.onload=function(){
+
+    const storageKey = "comments"
+
+    const vm = new Vue({
+        el:"#root",
+        data:{
+            
+            commentSet:[] 
+        },
+        methods:{
+            //获取所有的评论
+            getAllComments(){
+                //获取comments的数据
+                this.commentSet = JSON.parse(localStorage.getItem(storageKey) || "[]") 
+            }
+        },
+        components:{
+            addForm:{
+                template:"#commentFrm",
+                data:function(){
+                    return {
+                        title:"",
+                    }
+                },
+                methods:{
+                    addComment(){
+                        let data = {id:Date.now(),title:this.title} 
+                        //先获取里面的数据
+                        let rs = JSON.parse(localStorage.getItem(storageKey) || "[]") 
+                        rs.unshift( data )
+                        localStorage.setItem(storageKey,JSON.stringify(rs)) 
+                        this.title = "" 
+                        //触发func
+                        this.$emit('func') //自动刷新
+                    }
+                }
+            }
+        },
+        //创建完成data和methods的时候就要加载
+        created(){
+            this.getAllComments() 
+        }
+    })
+}
+</script>
+
+</html>

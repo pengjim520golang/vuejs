@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="root">
+
+        <h3 v-if="flag">pengjin</h3>
+
+        <h4 v-else="flag">zhangsan</h4>
+
+    </div>
+</body>
+<script src="https://cdn.bootcss.com/vue/2.6.10/vue.js"></script>
+
+<!--
+
+    v-if : 如果true元素显示,false元素被删除
+    v-else : 如果false元素显示,true元素被删除
+
+-->
+
+<script>
+const vm = new Vue({
+    el:"#root",
+    data:{
+        flag:false
+    }
+})
+</script>
+</html>
