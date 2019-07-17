@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+
+</head>
+<body>
+    <div id="root">
+        
+        <a href="#" @click.prevent="cmpName='login'">登录</a>
+        <a href="#" @click.prevent="cmpName='register'">注册</a>
+        <hr />
+        
+        <component :is="cmpName"></component>
+    </div>
+
+
+
+
+
+</body>
+<script src="https://cdn.bootcss.com/vue/2.6.10/vue.js"></script>
+<script>
+    window.onload = function(){
+
+        const vm = new Vue({
+            el:"#root",
+            data:{
+                cmpName:"login"
+            },
+            components:{
+                login:{
+                    template:"<h1>登录组件</h1>"
+                },
+                register:{
+                    template:"<h1>注册组件</h1>"
+                }
+            }
+        })
+
+
+    }
+</script>
+</html>

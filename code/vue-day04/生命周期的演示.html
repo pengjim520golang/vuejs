@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+
+</head>
+<body>
+    <div id="root">
+       <h3 name="el3">{{message}}</h3>
+       <hr />
+    </div>
+
+
+   
+
+
+
+
+</body>
+<script src="https://cdn.bootcss.com/vue/2.6.10/vue.js"></script>
+<script>
+    window.onload = function(){
+
+        const vm = new Vue({
+            el:"#root",
+            data:{
+                message:"Ok"
+            },
+            methods:{
+                fn(){
+                    console.log("我是methods中的fn函数")
+                }
+            },
+            //最先触发的钩子函数是beforeCreate
+            beforeCreate(){
+                //注意：beforeCreate表示Vue的实例被创建出来之前执行，Vue的实例并没有完整被创建完成
+                //console.log("beforeCreate",this.message) //undefined , 表示beforeCreate被触发的时候data还没有被Vue创建
+                //this.fn() //报错，报出当前fn不是一个函数,表示beforeCreate被触发的时候methods还没有被Vue创建
+            },
+            //第2个会被执行的钩子函数:created,它被调用的时候是在data和methods完成初始化之后
+            created(){
+                //console.log("created:",this.message) 
+                //this.fn()
+            },
+            //第3个会执行钩子函数beforeMount,表示当前模板在内存在中被编译完成，但是是在虚拟DOM中完成，未渲染到DOM树中去
+            beforeMount(){
+               //console.log( "beforeMount",document.getElementsByName("el3")[0].innerText ) 
+            },
+            //第4个会执行钩子函数mounted,这时用户看不到Dom树，但已经把模板推送到DOM树中进行替换了
+            //如果没有其他的操作，实例依然在内存中不动,数据还是旧的数据
+            mounted(){
+                this.message = "xxxx"
+                console.log( "mounted:",document.getElementsByName("el3")[0].innerText ) 
+            },
+
+            beforeUpdate(){
+                //看到的数据还是旧的
+                console.log( "beforeUpdate:",document.getElementsByName("el3")[0].innerText ) 
+            },
+
+            updated(){
+                //这里的数据才是data和页面进行同步的数据
+                console.log( "updated:",document.getElementsByName("el3")[0].innerText ) 
+            }
+        })
+
+
+    }
+</script>
+</html>
