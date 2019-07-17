@@ -96,3 +96,13 @@ import 'bootstrap/dist/js/bootstrap.min.js'
 ```
 
 > 注意：需要重新npm run dev才能生效
+
+
+# 博彩项目的开发流程
+
+### 准备素材的配置
+
+把`style.css`文件复制到`src/assets`目录,把图片文件复制到`src/assets/images`目录中
+
+* 打开入口文件`src/main.js`引入`style.css`的库依赖
+
