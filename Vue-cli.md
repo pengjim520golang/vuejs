@@ -106,3 +106,9 @@ import 'bootstrap/dist/js/bootstrap.min.js'
 
 * 打开入口文件`src/main.js`引入`style.css`的库依赖
 
+```javascript
+import '@/assets/style.css' 
+```
+
+### 制作TitleBar组件
+

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+
+    <style>
+        .borderStyle{
+            border: 5px solid #000; 
+        }
+        .fontStyle{
+            font-size:33px; 
+        }
+        .sizeStyle{
+            width: 300px;
+            height: 300px;
+        }
+    </style>
+</head>
+<body>
+    <div id="root">
+
+   
+        <!-- 通过数组的方式绑定 -->
+        <p :class="['sizeStyle','borderStyle']">我是一个中国人，我来自中国~！</p>
+        <hr />
+        <!-- 通过对象的方式绑定 -->
+        <p :class="{'sizeStyle':false,'borderStyle':true}">我是一个中国人，我来自中国~！</p>
+        <hr />
+        <!-- 通过数组（含对象）的方式绑定 -->
+        <button @click="sizeBool=false">消除fontStyle</button><br />
+        <p :class="['sizeStyle','borderStyle',{'fontStyle':sizeBool}]">我是一个中国人，我来自中国~！</p>
+
+         <!-- 通过数组（含对象,值为表达式）的方式绑定 -->
+         
+         <p :class="['sizeStyle','borderStyle',{'fontStyle':msg==='yes'}]">我是一个中国人，我来自中国~！</p>
+
+    </div>
+</body>
+<script src="https://cdn.bootcss.com/vue/2.6.10/vue.js"></script>
+<script>
+    window.onload = function(){
+        const vm = new Vue({
+            el:"#root",
+            data:{
+                sizeBool:true,
+                msg:"no"
+            }
+        })
+    }
+</script>
+</html>

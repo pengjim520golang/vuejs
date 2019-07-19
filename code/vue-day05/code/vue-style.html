@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+
+</head>
+<body>
+    <div id="root">
+
+   
+        <!-- 通过内嵌对象的方式绑定 -->
+        <p :style="{'font-size':'33px'}">我是一个中国人，我来自中国~！</p>
+        <p :style="styleObj">我是一个中国人，我来自中国~！</p>
+        <p :style="{color:'blue'}">我是一个中国人，我来自中国~！</p>
+    </div>
+</body>
+<script src="https://cdn.bootcss.com/vue/2.6.10/vue.js"></script>
+<script>
+    window.onload = function(){
+        const vm = new Vue({
+            el:"#root",
+            data:{
+                styleObj:{color:'red','font-size':"55px"}
+            }
+        })
+    }
+</script>
+</html>
